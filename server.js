@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   useUnifiedTopology: true
 // });
 
-mongoose.connect('mongodb+srv://parthipancseai:q4hGxzOs5nSW6ns2@db.gvn7lje.mongodb.net/', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -229,7 +229,7 @@ app.get('/event2.html', (req, res) => res.sendFile(path.join(__dirname, 'public'
 app.get('/main.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'main.html')));
 app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'login.html')));
 
-
+//mongodb+srv://parthipancseai:q4hGxzOs5nSW6ns2@db.gvn7lje.mongodb.net/
 
 const PORT = 3000;
 app.listen(PORT, () => {
