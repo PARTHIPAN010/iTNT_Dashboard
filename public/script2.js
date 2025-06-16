@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function saveEventToDB(teamCode, date, month, year, eventDetails, participants = [], startups = []) {
   try {
-    const response = await fetch('http://localhost:3000/api/events', {
+    const response = await fetch('/api/events', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
