@@ -1,0 +1,126 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #81a7b6;
+  color: #212121;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #1a73e8;
+  font-size: 26px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section {
+  background-color: #c9dfbd;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.08);
+  margin-bottom: 24px;
+  transition: box-shadow 0.3s ease;
+}
+
+.section:hover {
+  box-shadow: 0 8px 20px rgba(196, 207, 221, 0.2);
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 14px;
+  color: #222;
+  letter-spacing: 0.02em;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.controls select,
+.controls input[type="number"],
+.controls input[type="text"] {
+  padding: 10px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 120px;
+}
+
+.controls select:focus,
+.controls input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.3);
+}
+
+.controls button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a73e8, #4285f4);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 3px 6px rgba(26, 115, 232, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  min-width: 110px;
+}
+
+.controls button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #155ab6, #3367d6);
+  box-shadow: 0 5px 12px rgba(62, 84, 112, 0.6);
+}
+
+.controls button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.event-group {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.event-input {
+  display: flex;
+  gap: 12px;
+}
+
+.event-input input[type="number"] {
+  flex: 0 0 80px;
+}
+
+.event-input input[type="text"] {
+  flex: 1;
+}
+
+.summary {
+  margin-top: 20px;
+  background: #e3f2fd;
+  border-left: 5px solid #1a73e8;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #212121;
+  box-shadow: 0 3px 6px rgba(31, 49, 73, 0.15);
+}

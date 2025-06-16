@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Entry</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .main-dashboard-btn {
+      position: fixed;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #4CAF50, #81C784);
+      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .main-dashboard-btn:hover {
+      background: linear-gradient(135deg, #388E3C, #66BB6A);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard Event Entry</h1>
+    <div id="sections-container"></div>
+
+    <button onclick="goToNextPage()" class="next-button">Next Page</button>
+  </div>
+
+  <!-- Main Dashboard Button -->
+
+
+
+  
+  <button class="main-dashboard-btn" onclick="goToMainDashboard()">Main Dashboard</button>
+
+  <script src="script.js"></script>
+  <script>
+    function goToNextPage() {
+      window.location.href = "event2.html";
+    }
+
+    function goToMainDashboard() {
+      window.location.href = "main.html";
+    }
+  </script>
+</body>
+</html>
+
