@@ -14,12 +14,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // mongoose.connect('mongodb://localhost:27017/eventDashboard', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
-// });
+// });mongodb+srv://parthipancseai:q4hGxzOs5nSW6ns2@db.gvn7lje.mongodb.net/
 
-mongoose.connect(process.env.MONGO_URI, {
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
+
 
 // Event Schema
 // Event Schema
