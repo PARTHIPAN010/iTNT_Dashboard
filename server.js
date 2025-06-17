@@ -231,7 +231,7 @@ app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'public',
 
 //mongodb+srv://parthipancseai:q4hGxzOs5nSW6ns2@db.gvn7lje.mongodb.net/
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
@@ -246,5 +246,14 @@ const sectionsData = {
   B2: "No. of Startups to be Accelerated",
   B3: "Cumulative No. of IPs Created by Startups",
   B4: "Cumulative No. of Products Created/Launched",
-  B5: "Cumulative No. of Prototypes Showcased"
+  B5: "Cumulative No. of Prototypes Showcased",
+  C1: "Entrepreneurs benefitted (A1+A2+A3)",
+  C2: "Startups Supported (A1+A2+A3)",
+  C3: "Community Engagement Events",
+  C4: "Deep tech and Emerging Tech investors",
+  C5: "MoUs with Colleges for JIGSAW Platform",
+  C6: "Researchers onboarded onto JIGSAW Platform",
+  C7: "EoIs with international ecosystem players",
+  C8: "MoUs with Ecosystem Enablers (Industry, incubators etc)",
+  C9: "Product Launches"
 };
