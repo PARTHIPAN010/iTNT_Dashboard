@@ -264,7 +264,7 @@ periods = allPeriods.filter(p => {
     });
 
     // Function to update the dashboard with data from MongoDB
-async function updateDashboard() {
+async function updateDashboard(){
   try {
     // const response = await fetch('http://localhost:3000/api/summaries');
     const response = await fetch('/api/summaries');
@@ -325,7 +325,84 @@ async function updateDashboard() {
       } catch (error) {
         console.error('Error updating dashboard:', error);
       }
-    }
+    }                                                                           
+
+
+//      async function updateDashboard2() {
+//   try {
+//     const response = await fetch('/api/summaries');
+//     if (!response.ok) throw new Error('Failed to fetch summaries');
+
+//     const summaries = await response.json();
+//     const dashboard2Body = document.getElementById("dashboard2-body");
+//     const headerRow = document.getElementById("table-header-row-2");
+//     const footerRow = document.getElementById("column-totals-row-2");
+
+//     // Extract periods dynamically
+//     const periodSet = new Set();
+//     summaries.forEach(s => {
+//       if (s.teamCode.startsWith("C")) periodSet.add(s.period);
+//     });
+//     const periods = Array.from(periodSet).sort();
+
+//     // Update table header
+//     headerRow.innerHTML = `<th>Sl. No</th><th>Parameter</th>`;
+//     periods.forEach(period => {
+//       const th = document.createElement("th");
+//       th.textContent = period;
+//       headerRow.appendChild(th);
+//     });
+//     headerRow.innerHTML += `<th>Total</th>`;
+
+//     // Clear old rows
+//     dashboard2Body.innerHTML = "";
+
+//     // Build rows
+//     const parameters = [
+//       { id: "C1", name: "Entrepreneurs benefitted (A1+A2+A3)" },
+//       { id: "C2", name: "Startups Supported & Mentored" },
+//       { id: "C3", name: "Community Engagement" },
+//       { id: "C4", name: "Deep tech and Emerging Tech investors" },
+//       { id: "C5", name: "MoU's with Colleges for JIGSAW Platform" },
+//       { id: "C6", name: "Researchers onboarded onto JIGSAW" },
+//       { id: "C7", name: "EoIs with international ecosystem players" },
+//       { id: "C8", name: "MoUs with Ecosystem Enablers" },
+//       { id: "C9", name: "Product Launches" }
+//     ];
+
+//     parameters.forEach(param => {
+//       const tr = document.createElement("tr");
+//       tr.innerHTML = `<td>${param.id}</td><td>${param.name}</td>`;
+//       let rowTotal = 0;
+
+//       periods.forEach(period => {
+//         const match = summaries.find(s => s.teamCode === param.id && s.period === period);
+//         const count = match ? match.count : 0;
+//         rowTotal += count;
+//         tr.innerHTML += `<td>${count}</td>`;
+//       });
+
+//       tr.innerHTML += `<td>${rowTotal}</td>`;
+//       dashboard2Body.appendChild(tr);
+//     });
+
+//     // Update footer
+//     footerRow.innerHTML = `<td colspan="2">Column Total</td>`;
+//     for (let i = 0; i < periods.length; i++) {
+//       let colSum = 0;
+//       dashboard2Body.querySelectorAll("tr").forEach(row => {
+//         const cells = row.querySelectorAll("td");
+//         const val = parseInt(cells[i + 2]?.textContent || "0");
+//         colSum += isNaN(val) ? 0 : val;
+//       });
+//       footerRow.innerHTML += `<td>${colSum}</td>`;
+//     }
+//     footerRow.innerHTML += `<td></td>`;
+//   } catch (err) {
+//     console.error("Dashboard2 update failed:", err);
+//   }
+// }
+
 
     function updateTotals() {
       const rows = tbody.querySelectorAll("tr");
@@ -705,6 +782,7 @@ async function updateDashboard() {
           
           // Refresh the dashboard
           updateDashboard();
+          updateSecondDashboard();      
         } catch (error) {
           alert('Error updating event: ' + error.message);
         }
@@ -754,6 +832,8 @@ async function updateDashboard() {
         
         // Refresh the dashboard
         updateDashboard();
+        updateSecondDashboard();
+
         modal.style.display = 'none';
       } catch (error) {
         alert('Error deleting event: ' + error.message);
@@ -763,14 +843,18 @@ async function updateDashboard() {
     // Close modal when user clicks 'x' button
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
-      updateDashboard();  // Refresh dashboard counts after modal closes
+      updateDashboard();
+      updateSecondDashboard();
+  // Refresh dashboard counts after modal closes
     });
 
     // Close modal when clicking outside the modal content
     window.addEventListener("click", (event) => {
       if (event.target == modal) {
         modal.style.display = "none";
-        updateDashboard();  // Refresh dashboard counts after modal closes
+        updateDashboard();
+        updateSecondDashboard();
+  // Refresh dashboard counts after modal closes
       }
     });
 
@@ -794,7 +878,9 @@ async function updateDashboard() {
   tfootRow.innerHTML = `<td colspan="2">Column Total</td>`;
 
   try {
-    const res = await fetch('http://localhost:3000/api/summaries/extended');
+    // const res = await fetch('http://localhost:3000/api/summaries/extended');
+    const res = await fetch('/api/summaries/extended');
+
     const summaries = await res.json();
 
     const A_CODES = ["A1", "A2", "A3"];
@@ -927,7 +1013,9 @@ const periods = Array.from(periodSet).sort((a, b) => {
   let events = [];
 
   for (const code of codes) {
-    const res = await fetch(`http://localhost:3000/api/events/${period}/${code}`);
+    //const res = await fetch(`http://localhost:3000/api/events/${period}/${code}`);
+    const res = await fetch(`/api/events/${period}/${code}`);
+
     if (res.ok) {
       const data = await res.json();
       events.push(...data);
@@ -967,7 +1055,8 @@ async function showC1C2C3Details(code, period) {
   let events = [];
 
   for (const teamCode of summaryCodes) {
-    const res = await fetch(`http://localhost:3000/api/events/${period}/${teamCode}`);
+    // const res = await fetch(`http://localhost:3000/api/events/${period}/${teamCode}`);
+    const res = await fetch(`/api/events/${period}/${teamCode}`);
     if (res.ok) {
       const data = await res.json();
       events.push(...data);
@@ -1095,10 +1184,6 @@ async function showC1C2C3Details(code, period) {
     loadDashboardOverview2();
   };
 </script>
-
-
-
-
 
 </body>
 </html>
