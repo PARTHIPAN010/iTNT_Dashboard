@@ -196,7 +196,11 @@
       "retina_detect": true
     });
   </script>
-
+  <script>
+  if (localStorage.getItem("user")) {
+    window.location.href = "event1.html";
+  }
+</script>
   <!-- Login logic -->
   <script>
     const credentials = {
@@ -227,7 +231,7 @@
 
       if (credentials[username] === password) {
         localStorage.setItem("user", username);
-        window.location.href = "index.html";
+        window.location.href = "event1.html";
       } else {
         errorMsg.style.display = "block";
       }
