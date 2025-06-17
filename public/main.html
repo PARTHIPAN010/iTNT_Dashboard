@@ -265,7 +265,9 @@ periods = allPeriods.filter(p => {
     // Function to update the dashboard with data from MongoDB
 async function updateDashboard() {
   try {
-    const response = await fetch('http://localhost:3000/api/summaries');
+    // const response = await fetch('http://localhost:3000/api/summaries');
+    const response = await fetch('/api/summaries');
+
     if (!response.ok) throw new Error('Failed to fetch summaries');
     
     const summaries = await response.json();
@@ -357,7 +359,10 @@ async function updateDashboard() {
     // Function to show event details
     async function showEventDetails(teamCode, period) {
       try {
-        const response = await fetch(`http://localhost:3000/api/events/${period}/${teamCode}`);
+        // const response = await fetch(`http://localhost:3000/api/events/${period}/${teamCode}`);
+        const response = await fetch(`/api/events/${period}/${teamCode}`);
+
+
         if (!response.ok) throw new Error('Failed to fetch events');
         
         const events = await response.json();
