@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Main Dashboard</title>
   <style>
+    
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f4f9fd;
@@ -674,7 +675,8 @@ async function updateDashboard() {
       
       saveBtn.onclick = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+          const response = await fetch(`/api/events/${eventId}`, {
+
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -739,9 +741,14 @@ async function updateDashboard() {
       if (!confirm('Are you sure you want to delete this event?')) return;
       
       try {
-        const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+        const response = await fetch(`/api/events/${eventId}`, {
           method: 'DELETE'
         });
+        // fetch(`/api/events/${eventId}`, {
+        //   method: 'DELETE'
+        // });
+
+
         
         if (!response.ok) throw new Error('Failed to delete event');
         
@@ -1032,6 +1039,63 @@ async function showC1C2C3Details(code, period) {
     Download Main Dashboard Overview 2
   </button>
 </div> -->
+
+<script>
+  async function loadDashboardOverview2() {
+    const tableBody = document.getElementById('overview2-body');
+    const res = await fetch('/api/summaries/extended');
+    const data = await res.json();
+
+    const grouped = {};
+
+    data.forEach(entry => {
+      if (!grouped[entry.teamCode]) {
+        grouped[entry.teamCode] = {
+          parameter: entry.parameter,
+          total: 0,
+          entrepreneurs: 0,
+          startups: 0
+        };
+      }
+      grouped[entry.teamCode].total += entry.eventCount;
+      grouped[entry.teamCode].entrepreneurs += entry.entrepreneurs;
+      grouped[entry.teamCode].startups += entry.startups;
+    });
+
+    tableBody.innerHTML = '';
+    let grandTotal = 0;
+
+    Object.entries(grouped).forEach(([code, obj]) => {
+      if (['C1', 'C2', 'C3'].includes(code)) {
+        const row = document.createElement('tr');
+
+        const cell1 = document.createElement('td');
+        cell1.innerText = code;
+
+        const cell2 = document.createElement('td');
+        cell2.innerText = obj.parameter;
+
+        const cell3 = document.createElement('td');
+        cell3.innerText = obj.total;
+
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        tableBody.appendChild(row);
+
+        grandTotal += obj.total;
+      }
+    });
+
+    document.getElementById('overview2-total').innerText = grandTotal;
+  }
+
+  // Load on page open
+  window.onload = () => {
+    loadDashboardOverview2();
+  };
+</script>
+
 
 
 
