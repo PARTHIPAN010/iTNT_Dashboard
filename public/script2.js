@@ -76,6 +76,13 @@ function addMonthForm(section, container, code) {
   const form = document.createElement("div");
   form.className = "controls";
 
+  // ✅ Skip all controls for C1, C2, C3
+if (["C1", "C2", "C3"].includes(code)) {
+  container.appendChild(form); // still append empty for layout
+  return;
+}
+
+
   const yearSelect = document.createElement("select");
   yearOptions.forEach(y => {
     const opt = document.createElement("option");
