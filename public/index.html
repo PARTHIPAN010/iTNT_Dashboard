@@ -142,28 +142,15 @@
   <!-- particles.js library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
-  <!-- AI-style background config -->
+  <!-- Background config -->
   <script>
     particlesJS("particles-js", {
       "particles": {
-        "number": {
-          "value": 75,
-          "density": { "enable": true, "value_area": 800 }
-        },
+        "number": { "value": 75, "density": { "enable": true, "value_area": 800 } },
         "color": { "value": "#00e5ff" },
-        "shape": {
-          "type": "circle",
-          "stroke": { "width": 0, "color": "#000000" },
-          "polygon": { "nb_sides": 5 }
-        },
-        "opacity": {
-          "value": 0.5,
-          "random": false
-        },
-        "size": {
-          "value": 3,
-          "random": true
-        },
+        "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000" }, "polygon": { "nb_sides": 5 } },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3, "random": true },
         "line_linked": {
           "enable": true,
           "distance": 150,
@@ -196,12 +183,8 @@
       "retina_detect": true
     });
   </script>
-  <script>
-  if (localStorage.getItem("user")) {
-    window.location.href = "event1.html";
-  }
-</script>
-  <!-- Login logic -->
+
+  <!-- Login script -->
   <script>
     const credentials = {
       "Admin": "ADMIN@123",
@@ -230,7 +213,7 @@
       const errorMsg = document.getElementById("errorMessage");
 
       if (credentials[username] === password) {
-        localStorage.setItem("user", username);
+        localStorage.setItem("user", username); // optional
         window.location.href = "event1.html";
       } else {
         errorMsg.style.display = "block";
