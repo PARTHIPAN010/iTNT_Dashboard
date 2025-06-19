@@ -41,7 +41,36 @@
 
 
   
-  <button class="main-dashboard-btn" onclick="goToMainDashboard()">Main Dashboard</button>
+  <!-- <button class="main-dashboard-btn" onclick="goToMainDashboard()">Main Dashboard</button> -->
+
+  <!-- Main Dashboard Button -->
+<!-- Main Dashboard Button -->
+<button class="main-dashboard-btn" onclick="showLogin()">Main Dashboard</button>
+
+<!-- Login Modal -->
+<div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; display:flex; align-items:center; justify-content:center;">
+  <div style="background:#ffffff; padding:30px; border-radius:10px; text-align:center; width:300px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+    <h3 style="color:#2E7D32;">Enter your credentials to open Main Dashboard </h3>
+    
+    <!-- ID Field -->
+    <input type="text" id="userId" placeholder="Enter ID" style="margin:10px 0; padding:10px; width:100%; border:1px solid #ccc; border-radius:5px;" />
+
+    <!-- Password Field with Toggle -->
+    <div style="position: relative; width: 100%; margin: 10px 0;">
+      <input type="password" id="password" placeholder="Enter Password" style="width: 100%; padding:10px; padding-right: 6px; border:1px solid #ccc; border-radius:5px;" />
+      <span onclick="togglePassword()" id="eyeIcon" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px;">👁️</span>
+    </div>
+
+    <!-- Buttons -->
+    <button onclick="verifyLogin()" style="padding:10px 20px; margin-top: 10px; background-color:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;">Login</button>
+    <button onclick="hideLogin()" style="padding:10px 20px; margin-top: 10px; margin-left: 10px; background-color:#ccc; border:none; border-radius:5px; cursor:pointer;">Cancel</button>
+
+    <!-- Error Message -->
+    <p id="loginError" style="color:red; display:none; margin-top:10px;">Invalid credentials</p>
+  </div>
+</div>
+
+
 
   <script src="script.js"></script>
   <script>
@@ -53,6 +82,53 @@
       window.location.href = "main.html";
     }
   </script>
+
+
+<script>
+  function showLogin() {
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  function hideLogin() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("loginError").style.display = "none";
+  }
+
+  function verifyLogin() {
+    const userId = document.getElementById("userId").value.trim();
+    const password = document.getElementById("password").value;
+
+    const users = [
+      { id: "Admin", password: "ADMIN@123" },
+      { id: "CEO", password: "CEO@123" },
+      { id: "VP", password: "VP@123" }
+    ];
+
+    const isValid = users.some(user => user.id === userId && user.password === password);
+
+    if (isValid) {
+      window.location.href = "main.html";
+    } else {
+      document.getElementById("loginError").style.display = "block";
+    }
+  }
+
+  function togglePassword() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      eyeIcon.textContent = "👁️"; // change to hide icon
+    } else {
+      passwordField.type = "password";
+      eyeIcon.textContent = "🙈"; // change back to view icon
+    }
+  }
+</script>
+
+
+
 </body>
 </html>
 
