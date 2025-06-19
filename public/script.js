@@ -229,7 +229,7 @@ function addMonthForm(section, container, code) {
         }
       }
     });
-  };
+  };                                     
 
   plusPart.onclick = () => addMonthForm(section, container, code);
 
